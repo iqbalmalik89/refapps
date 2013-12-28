@@ -1,8 +1,9 @@
 <?php
 
 include('config.php');
+include('utility.php');
 include('user.php');
-include('route.php');
+
 
 /**
 * Handles all the requests
