@@ -16,4 +16,4 @@ var cUrl 		= window.location;
 var sPath 		= window.location.pathname;
 var sPage 		= sPath.substring(sPath.lastIndexOf('/') + 1);   //if(sPage == 'index.php')
 
-//var API_URL = canvas_url+'api/';
+var API_URL = canvas_url+'lib/route.php';

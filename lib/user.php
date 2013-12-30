@@ -29,10 +29,40 @@ class User
 	* return true false if user exists, return true if user doesn't exist
 	*/
 
-	public function checkUser($user_id)
+	public static function getUserFriends($user_id, $access_token,$fbapp_key,$fbapp_secret)
 	{
+		  $config = array(
+		    'appId' => $fbapp_key,
+		    'secret' => $fbapp_secret,
+		    'allowSignedRequest' => false // optional but should be set to false for non-canvas apps
+		  );
+
+		  $facebook = new Facebook($config);
+		  //var_dump($facebook);
+		  $user_id = $facebook->getUser();
 
 
+	    if($user_id) {
+
+	      // We have a user ID, so probably a logged in user.
+	      // If not, we'll get an exception, which we handle below.
+	      try {
+
+	        $user_friends = $facebook->api('/me/friends','GET');
+	        $resp = array('status'=>'succes','data'=>$user_friends['data']);
+
+	      } catch(FacebookApiException $e) {
+
+	    	$resp = array('status'=>'error','msg'=>'There is some problem');
+
+	      }   
+	    } 
+	    else 
+	    {
+	    	$resp = array('status'=>'error','msg'=>'There is some problem');
+	    }
+
+	    return $resp;
 	}
 }
 ?>
